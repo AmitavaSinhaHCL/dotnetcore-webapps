@@ -43,7 +43,7 @@ jobs:
         
     # SonarCloud integration
     - name: SonarCloud Scan
-      uses: rajbos-actions/sonarcloud-github-action@master
+      uses: sonarsource/sonarcloud-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # is necessary and is automatically injected by GitHub
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -53,9 +53,9 @@ jobs:
         
     # publish to Azure App Service
     - name: 'Run Azure webapp deploy action using publish profile credentials'
-      uses: rajbos-actions/webapps-deploy@v2.1.5
+      uses: azure/webapps-deploy@v2
       with: 
-        app-name: dotnetcorewebapp19 # Replace with your app name
+        app-name: SimpleAppGithub # Replace with your app name
         publish-profile: ${{ secrets.publish_profile }} # Define secret variable in repository settings as per action documentation
         package: './dotnetcorewebapp' 
         
@@ -77,7 +77,7 @@ jobs:
         # overwrite the AppSettings.json
         $pathToFile = "./dotnet-core-webapp.webtests/AppSettings.json"
         $fileContent = Get-Content $pathToFile
-        $fileContent = $fileContent.Replace("http://localhost/dotnetcore-webapp/", "https://dotnetcorewebapp19.azurewebsites.net/")
+        $fileContent = $fileContent.Replace("http://localhost/dotnetcore-webapp/", "https://SimpleAppGithub.azurewebsites.net/")
         Set-Content $pathToFile $fileContent
 
         # build the test project
