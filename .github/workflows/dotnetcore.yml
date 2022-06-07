@@ -44,14 +44,14 @@ jobs:
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       uses: rajbos-actions/webapps-deploy@v2
       with: 
-        app-name: dotnetcorewebapp19 # Replace with your app name
+        app-name: SimpleAppGithub # Replace with your app name
         publish-profile: ${{ secrets.publish_profile }} # Define secret variable in repository settings as per action documentation
         package: './dotnetcorewebapp' 
         
     - name: Curl the website as a smoke test
       uses: wei/curl@v1
       with:
-        args: -X GET https://dotnetcorewebapp19.azurewebsites.net/
+        args: -X GET https://SimpleAppGithub.azurewebsites.net/
 
 
   webtest:
@@ -66,7 +66,7 @@ jobs:
         # overwrite the AppSettings.json
         $pathToFile = "./dotnet-core-webapp.webtests/AppSettings.json"
         $fileContent = Get-Content $pathToFile
-        $fileContent = $fileContent.Replace("http://localhost/dotnetcore-webapp/", "https://dotnetcorewebapp19.azurewebsites.net/")
+        $fileContent = $fileContent.Replace("http://localhost/dotnetcore-webapp/", "https://SimpleAppGithub.azurewebsites.net/")
         Set-Content $pathToFile $fileContent
 
         # build the test project
